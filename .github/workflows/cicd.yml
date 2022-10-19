@@ -4,11 +4,11 @@ name: CI
 
 # Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the "master" branch
+  # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
-    branches: [ "master" ]
+    branches: [ "dep-inclusions" ]
   pull_request:
-    branches: [ "master" ]
+    branches: [ "main" ]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -29,18 +29,18 @@ jobs:
       - name: Run a one-line script
         run: echo Hello, world!
 
-       # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: echo Hello, world!
-    # Runs a set of commands using the runners shell
-      - name: Use node js
+      # Runs a set of commands using the runners shell
+      - name: use node js
         uses: actions/setup-node@v2
         with:
           node-version: "14.x"
-
-    # Install project dependencies
+      
+      # Install project dependencies     module is install
       - name: Install dependencies
         run: npm install
+
+      #- name: Run test                 # if failing
+      #  run: npm test
 
   # Deploy To Heroku
   deploy:
@@ -51,5 +51,5 @@ jobs:
       - uses: akhileshns/heroku-deploy@v3.12.12 
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: "comp3104-devops-101329235" #Must be unique in Heroku
-          heroku_email: "francessellyn@gmail.com"      
+          heroku_app_name: "comp3104-devops" #Must be unique in Heroku
+          heroku_email: "francessellyn@gmail.com"
